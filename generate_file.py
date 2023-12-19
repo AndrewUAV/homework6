@@ -81,19 +81,9 @@ def generate_music_files(path):
     file_path = path / f'{get_random_filename()}.{selected_extension}'
     audio.export(file_path,format=selected_extension)
 
-def generate_archives_files(path):
-    # archives - ZIP, GZ, TAR
-    archives = ('zip', 'gz', 'tar')
-    selected_format = random.choice(archives)
-
-    # Adjust the selected format to match the supported formats by shutil.make_archive
-    selected_format = 'gztar' if selected_format == 'gz' else selected_format
-
-    # Create the archive using shutil.make_archive
-    shutil.make_archive(f"{path}/{get_random_filename()}", selected_format, path)
-
-
-
+def generate_archive_files(path):
+    archive = ('ZIP', 'GZ', 'TAR')
+    shutil.make_archive(f"{path}/{get_random_filename()}", f'{choice(archive).lower()}', path)
 
 def generate_folders(path):
     folder_name = ['temp', 'folder', 'dir', 'tmp', 'OMG', 'is_it_true', 'no_way', 'find_it']
@@ -110,7 +100,7 @@ def generate_random_files(path):
     for i in range(3, randint(5, 7)):
         function_list = [generate_images_files,generate_video_files,
                          generate_documents_files, generate_music_files,
-                         generate_archives_files]
+                         generate_archive_files]
         choice(function_list)(path)
 
 
