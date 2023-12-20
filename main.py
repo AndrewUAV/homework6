@@ -1,4 +1,4 @@
-import os
+
 import sys
 import scan
 import shutil
@@ -22,9 +22,11 @@ def handle_archive(path, root_folder, dist):
         shutil.unpack_archive(str(path.resolve()), str(archive_folder.resolve()))
     except shutil.ReadError:
         archive_folder.rmdir()
+        path.unlink()
         return
     except FileNotFoundError:
         archive_folder.rmdir()
+        path.unlink()
         return
     path.unlink()
 
